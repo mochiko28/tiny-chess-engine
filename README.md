@@ -6,8 +6,10 @@
 
 A 4 KB Python entry for make.fun's tiny-chess-01. The house gauntlet is deterministic, so the
 engine carries a compressed table of prepared winning lines: for every opponent, opening and
-colour, the shortest mate our offline search found against that exact opponent. `main.py`
-replays the line by index into the env's legal-move list.
+colour, the shortest mate our offline search found against that exact opponent. Each move
+is stored as its rank in a fixed move ordering (checks first, then captured-piece value, then
+distance to the enemy king), so most moves cost a few bits. `main.py` recomputes that ordering
+from the env's legal moves and plays the stored rank; unknown games play rank 0.
 
 ## Run it
 
